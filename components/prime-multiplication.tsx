@@ -53,19 +53,19 @@ export default function PrimeMultiplication(
 
                 <div className="mx-auto mt-8">
                     <p className="text-center mb-2"><Latex>$n=$</Latex></p>
-                    <div className="font-mono border-2 text-center py-3 px-10 text-7xl rounded-md shadow-sm">
-                        {firstPrimeNumber * secondPrimeNumber}
+                    <div className="font-mono border-2 text-center px-10 py-3 text-7xl rounded-md shadow-sm">
+                        <p className="mt-2">{firstPrimeNumber * secondPrimeNumber}</p>
                     </div>
                 </div>
 
-                <div className="text-slate-500 text-sm mt-5 text-center" >
+                <div className="text-slate-500 text-sm mt-10 text-center" >
                     Note: real RSA encryption requires much bigger numbers (hundreds of digits).
                     We are using small numbers to illustrate the concept in an easy way.
                 </div>
 
                 <Button
                     disabled={firstPrimeNumber === secondPrimeNumber}
-                    className="text-2xl py-7 w-60 mt-10 mx-auto"
+                    className="text-2xl py-7 w-60 mt-7 mx-auto"
                     onClick={() => { }}
                 >
                     <a href="#second" className="text-center">

@@ -16,38 +16,43 @@ export default function NumberPicker(
     let [disabled, setDisabled] = useState([false, false])
 
     return (
-        <div className="flex flex-row justify-between w-auto border-2 rounded-md pl-8 py-3 space-x-2 shadow-sm">
-            <div className="text-[70px] mt-7 font-mono col-span-2 text-right w-[2ch]">
+        <div className="flex flex-row justify-center border-2 rounded-md p-3 space-x-2 shadow-sm">
+            <div className="text-6xl mt-4 ml-3 font-mono col-span-2 text-right w-[2ch] pl-4">
                 {value}
             </div>
-            <div className="flex flex-col space-y-[1px]">
+            <div className="grid grid-rows-2 space-y-[1px] pr-4">
                 <Button
+                    className=""
                     disabled={disabled[0]}
                     onClick={() => {
-                        let nextIndex = numberList.indexOf(value) + 1
-                        setValue(numberList[nextIndex])
-                        if (nextIndex+1 >= numberList.length) {
-                            setDisabled([true, disabled[1]])
-                            return
+                        if (disabled[0]) return
+                            let nextIndex = numberList.indexOf(value) + 1
+                            setValue(numberList[nextIndex])
+                            if (nextIndex + 1 >= numberList.length) {
+                                setDisabled([true, disabled[1]])
+                                return
+                            }
+                            setDisabled([disabled[0], false])
                         }
-                        setDisabled([disabled[0], false])
-                    }}
+                    }
                     variant="link"
-                    >
-                        <ArrowUp/>
-                    </Button>
+                >
+                    <ArrowUp />
+                </Button>
                 <Button
                     disabled={disabled[1]}
                     onClick={() => {
+                        if(disabled[1]) return
                         let nextIndex = numberList.indexOf(value) - 1
                         setValue(numberList[nextIndex])
-                        if (nextIndex-1 < 0) {
+                        if (nextIndex - 1 < 0) {
                             setDisabled([disabled[0], true])
                             return
                         }
                         setDisabled([false, disabled[1]])
                     }}
-                    variant="link"><ArrowDown /></Button>
+                    variant="link"><ArrowDown />
+                </Button>
             </div>
         </div>
     )
