@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 export default function Navbar() {
     return (
         <nav className="px-8 py-5 shadow-md flex justify-between">
-            <a className="text-3xl font-mono font-bold" href="/">
+            <a className="text-3xl font-mono font-bold mt-1" href="/">
                 RSALI5
             </a>
             <a>

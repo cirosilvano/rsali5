@@ -16,11 +16,11 @@ export default function NumberPicker(
     let [disabled, setDisabled] = useState([false, false])
 
     return (
-        <div className="grid grid-cols-3 w-48 border-2 rounded-md px-5 py-3 w-auto space-x-2 shadow-sm">
-            <div className="text-[70px] mt-7 font-mono col-span-2 text-right mr-2">
+        <div className="flex flex-row justify-between w-auto border-2 rounded-md pl-8 py-3 space-x-2 shadow-sm">
+            <div className="text-[70px] mt-7 font-mono col-span-2 text-right w-[2ch]">
                 {value}
             </div>
-            <div className="grid grid-rows-2 space-y-[1px]">
+            <div className="flex flex-col space-y-[1px]">
                 <Button
                     disabled={disabled[0]}
                     onClick={() => {

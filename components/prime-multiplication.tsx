@@ -39,7 +39,7 @@ export default function PrimeMultiplication(
             </div>
 
             <div className="flex flex-col justify-center mt-8">
-                <div className="flex flex-row space-x-2 justify-center">
+                <div className="grid grid-cols-2 space-x-2 justify-center mx-auto">
                     <div>
                         <p className="text-center mb-2"><Latex>$p1=$</Latex></p>
                         <NumberPicker numberList={primeNumbers} value={firstPrimeNumber} setValue={setFirstPrimeNumber} />
