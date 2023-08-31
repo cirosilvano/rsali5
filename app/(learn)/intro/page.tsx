@@ -29,7 +29,7 @@ export default function IntroPage() {
                 <p className="mt-10 font-bold text-2xl">Hi!</p>
             </div>
             <p className="mt-5">Alice has a secret: it took her <b>ages</b> to understand RSA encryption.</p>
-            <p className="mt-4">Actually, it was a couple days - but she doesn't want anybody to know the exact number of days, except for her friend Bob.</p>
+            <p className="mt-4">Actually, it was a couple days - but she doesn&apos;t want anybody to know the exact number of days, except for her friend Bob.</p>
 
             <div className="flex justify-end mt-5">
                 <p className="mt-10 font-bold text-2xl">Yo.</p>
@@ -41,7 +41,7 @@ export default function IntroPage() {
                 />
             </div>
 
-            <p className="mt-4">Alice's nosy classmate, Maddie, really enjoys listening to Alice and Bob talking.</p>
+            <p className="mt-4">Alice&apos;s nosy classmate, Maddie, really enjoys listening to Alice and Bob talking.</p>
 
             <p>Alice knows this and decides to use RSA encryption to communicate this number to Bob.</p>
             
@@ -61,7 +61,7 @@ export default function IntroPage() {
             <a href="/first-step" className="flex justify-center">
                 <Button className="text-2xl px-7 py-7 mt-10">
                     <div className="flex flex-row ml-2">
-                        Let's do this!
+                        Let&apos;s do this!
                         <ArrowRight className="ml-2 mt-1" />
                     </div>
                 </Button>

@@ -28,13 +28,13 @@ export default function PrimeMultiplication(
             </h2>
             <div className="mt-5 space-y-2">
                 <p>
-                    Now, we have to choose two prime numbers and multiply them. We'll call them <Latex strict>$p1$ and $p2$, and their product $n$.</Latex>
+                    Now, we have to choose two prime numbers and multiply them. We&apos;ll call them <Latex strict>$p1$ and $p2$, and their product $n$.</Latex>
                 </p>
                 <p>
                     Remember: a number is prime if it can only be divided by itself or by 1.
                 </p>
                 <p>
-                    Don't worry if this is sounding a bit random to you, it'll make sense in a minute.
+                    Don&apos;t worry if this is sounding a bit random to you, it&apos;ll make sense in a minute.
                 </p>
             </div>
 

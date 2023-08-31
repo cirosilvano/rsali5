@@ -24,7 +24,7 @@ export default function CreateMessage(
                 1. The message to encrypt
             </h2>
             <p className="mt-6">
-                Alright, let's be honest here. How long did it take for Alice to understand RSA encryption? Don't worry, only Bob will receive this information.
+                Alright, let&apos;s be honest here. How long did it take for Alice to understand RSA encryption? Don&apos;t worry, only Bob will receive this information.
             </p>
 
             <div className="flex flex-col justify-center">
