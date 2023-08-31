@@ -14,7 +14,7 @@ export default function IntroPage() {
     };
 
     return (
-        <div className="flex flex-col p-20 text-xl lg:px-60 xl:px-80">
+        <div className="flex flex-col p-10 text-xl lg:px-60 xl:px-80">
             <h1 className="text-5xl font-bold">Our scenario</h1>
             <p className="mt-6">
                 Meet Alice.

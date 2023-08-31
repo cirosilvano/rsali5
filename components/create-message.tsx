@@ -20,7 +20,7 @@ export default function CreateMessage(
 ) {
     return (
         <div>
-            <h2 className="mt-16 text-3xl font-bold">
+            <h2 className="mt-10 text-3xl font-bold">
                 1. The message to encrypt
             </h2>
             <p className="mt-6">
@@ -48,7 +48,7 @@ export default function CreateMessage(
 
                     <Button
                         className="text-2xl py-7 w-60 mt-10 mx-auto"
-                        onClick={(e) => {
+                        onClick={() => {
                             setSliderDisabled(true)
 
                         }}

@@ -28,7 +28,7 @@ export default function PrimeMultiplication(
             </h2>
             <div className="mt-5 space-y-2">
                 <p>
-                    Now, we have to choose two prime numbers and multiply them. We&apos;ll call them <Latex strict>$p1$ and $p2$, and their product $n$.</Latex>
+                    Now, we have to choose two <u><b>distinct</b></u> prime numbers and multiply them. We&apos;ll call them <Latex strict>$p1$ and $p2$, and their product $n$.</Latex>
                 </p>
                 <p>
                     Remember: a number is prime if it can only be divided by itself or by 1.
@@ -64,7 +64,7 @@ export default function PrimeMultiplication(
                 </div>
 
                 <Button
-                    disabled={false}
+                    disabled={firstPrimeNumber === secondPrimeNumber}
                     className="text-2xl py-7 w-60 mt-10 mx-auto"
                     onClick={() => { }}
                 >

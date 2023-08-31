@@ -27,7 +27,7 @@ export default function FirstStepPage() {
 
     return (
         <div className="flex flex-col p-10 lg:p-20 text-xl lg:px-60 xl:px-80">
-            <h1 className="text-5xl font-bold">Prime-quality encryption</h1>
+            <h1 className="text-[38px] leading-10 font-bold">Prime-quality encryption</h1>
 
             <CreateMessage
                 sliderValue={sliderValue}
