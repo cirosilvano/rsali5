@@ -39,13 +39,13 @@ export default function PrimeMultiplication(
             </div>
 
             <div className="flex flex-col justify-center mt-8">
-                <div className="grid grid-cols-2 space-x-2 justify-center mx-auto">
+                <div className="flex justify-around">
                     <div>
-                        <p className="text-center mb-2"><Latex>$p1=$</Latex></p>
+                        <p className="text-center"><Latex>$p1=$</Latex></p>
                         <NumberPicker numberList={primeNumbers} value={firstPrimeNumber} setValue={setFirstPrimeNumber} />
                     </div>
                     <div>
-                        <p className="text-center mb-2"><Latex>$p2=$</Latex></p>
+                        <p className="text-center"><Latex>$p2=$</Latex></p>
                         <NumberPicker numberList={primeNumbers} value={secondPrimeNumber} setValue={setSecondPrimeNumber} />
                     </div>
                 </div>
@@ -53,7 +53,7 @@ export default function PrimeMultiplication(
 
                 <div className="mx-auto mt-8">
                     <p className="text-center mb-2"><Latex>$n=$</Latex></p>
-                    <div className="font-mono border-2 text-center px-10 py-3 text-7xl rounded-md shadow-sm">
+                    <div className="flex items-center font-mono border-2 text-center px-10 py-3 text-7xl rounded-md shadow-sm">
                         <p className="mt-2">{firstPrimeNumber * secondPrimeNumber}</p>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
 
@@ -16,13 +16,12 @@ export default function NumberPicker(
     let [disabled, setDisabled] = useState([false, false])
 
     return (
-        <div className="grid grid-cols-2 border-2 rounded-md py-3 shadow-sm">
-            <div className="text-6xl mt-4 ml-3 font-mono text-right w-[2ch] pl-4">
+        <div className="flex items-center justify-around py-2 px-2 rounded-md border-2 shadow-sm">
+            <div className="text-6xl w-[2ch] text-right">
                 {value}
             </div>
-            <div className="grid grid-rows-2 space-y-[1px]">
+            <div className="grid grid-cols-1">
                 <Button
-                    className=""
                     disabled={disabled[0]}
                     onClick={() => {
                         if (disabled[0]) return
@@ -37,7 +36,7 @@ export default function NumberPicker(
                     }
                     variant="link"
                 >
-                    <ArrowUp />
+                    <ChevronUp />
                 </Button>
                 <Button
                     disabled={disabled[1]}
@@ -51,7 +50,7 @@ export default function NumberPicker(
                         }
                         setDisabled([false, disabled[1]])
                     }}
-                    variant="link"><ArrowDown />
+                    variant="link"><ChevronDown />
                 </Button>
             </div>
         </div>
