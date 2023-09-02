@@ -1,21 +1,26 @@
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, XCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import NumberPicker from "./number-picker";
 import Latex from "react-latex-next";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface PrimeMultiplicationProps {
     firstPrimeNumber: number,
     setFirstPrimeNumber: (value: number) => void,
     secondPrimeNumber: number,
     setSecondPrimeNumber: (value: number) => void,
+    numberPickersDisabled: boolean,
+    setNumberPickersDisabled: (value: boolean) => void
 }
 
 export default function PrimeMultiplication(
-    { 
-        firstPrimeNumber, 
-        setFirstPrimeNumber, 
-        secondPrimeNumber, 
-        setSecondPrimeNumber 
+    {
+        firstPrimeNumber,
+        setFirstPrimeNumber,
+        secondPrimeNumber,
+        setSecondPrimeNumber,
+        numberPickersDisabled,
+        setNumberPickersDisabled,
     }: PrimeMultiplicationProps
 ) {
 
@@ -23,8 +28,8 @@ export default function PrimeMultiplication(
 
     return (
         <div className="">
-            <h2 id="secondTitle" className="mt-20 text-3xl font-bold pt-5">
-                2. Prime factorization
+            <h2 id="prime-factorization" className="mt-20 text-3xl font-bold pt-5">
+                2. Prime multiplication
             </h2>
             <div className="mt-5 space-y-2">
                 <p>
@@ -42,11 +47,11 @@ export default function PrimeMultiplication(
                 <div className="flex justify-around">
                     <div>
                         <p className="text-center"><Latex>$p1=$</Latex></p>
-                        <NumberPicker numberList={primeNumbers} value={firstPrimeNumber} setValue={setFirstPrimeNumber} />
+                        <NumberPicker disablePickers={numberPickersDisabled} numberList={primeNumbers} value={firstPrimeNumber} setValue={setFirstPrimeNumber} />
                     </div>
                     <div>
                         <p className="text-center"><Latex>$p2=$</Latex></p>
-                        <NumberPicker numberList={primeNumbers} value={secondPrimeNumber} setValue={setSecondPrimeNumber} />
+                        <NumberPicker disablePickers={numberPickersDisabled} numberList={primeNumbers} value={secondPrimeNumber} setValue={setSecondPrimeNumber} />
                     </div>
                 </div>
 
@@ -66,11 +71,16 @@ export default function PrimeMultiplication(
                 <Button
                     disabled={firstPrimeNumber === secondPrimeNumber}
                     className="text-2xl py-7 w-60 mt-7 mx-auto"
-                    onClick={() => { }}
+                    variant = {numberPickersDisabled ? "completed" : "default"}
+                    onClick={() => {
+                        if(!numberPickersDisabled && firstPrimeNumber !== secondPrimeNumber) {
+                            setNumberPickersDisabled(true)
+                        }
+                    }}
                 >
                     <a href="#second" className="text-center">
                         <div className="flex flex-row ml-1">
-                            {false ?
+                            {numberPickersDisabled ?
                                 <>
                                     Done
                                     <CheckCircle className="ml-2 mt-1" />
@@ -79,7 +89,18 @@ export default function PrimeMultiplication(
                         </div></a>
                 </Button>
 
-
+                <AnimatePresence>
+                    {firstPrimeNumber === secondPrimeNumber &&
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="text-red-700 flex justify-center items-center space-x-2">
+                            <XCircle className="mt-4" />
+                            <div className="text-sm text-center mt-5 mb-1">The two prime numbers must be different.</div>
+                        </motion.div>
+                    }
+                </AnimatePresence>
 
             </div>
         </div>

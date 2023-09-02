@@ -44,7 +44,7 @@ export default function CreateMessage(
                     value={[sliderValue]}
                     onValueChange={([sliderValue]) => setSliderValue(sliderValue)}
                 />
-                <a href="#secondTitle" className="text-center">
+                
 
                     <Button
                         className="text-2xl py-7 w-60 mt-10 mx-auto"
@@ -57,19 +57,18 @@ export default function CreateMessage(
                         <div className="flex flex-row ml-1">
                             {sliderDisabled ?
                                 <>
-                                    Done
+                                    <a href="#prime-factorization" className="text-center">Done</a>
                                     <CheckCircle className="ml-2 mt-1" />
                                 </>
                                 : "Confirm"}
 
                         </div>
                     </Button>
-                </a>
             </div>
 
             <div>
             </div>
-            
+
         </div>
     )
 }

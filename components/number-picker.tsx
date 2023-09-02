@@ -7,10 +7,11 @@ interface NumberPickerProps {
     numberList: number[],
     value: number,
     setValue: (value: number) => void
+    disablePickers: boolean
 }
 
 export default function NumberPicker(
-    { numberList, value, setValue }: NumberPickerProps
+    { numberList, value, setValue, disablePickers }: NumberPickerProps
 ) {
 
     let [disabled, setDisabled] = useState([false, false])
@@ -22,7 +23,7 @@ export default function NumberPicker(
             </div>
             <div className="grid grid-cols-1">
                 <Button
-                    disabled={disabled[0]}
+                    disabled={disablePickers || disabled[0]}
                     onClick={() => {
                         if (disabled[0]) return
                             let nextIndex = numberList.indexOf(value) + 1
@@ -39,7 +40,7 @@ export default function NumberPicker(
                     <ChevronUp />
                 </Button>
                 <Button
-                    disabled={disabled[1]}
+                    disabled={disablePickers || disabled[1]}
                     onClick={() => {
                         if(disabled[1]) return
                         let nextIndex = numberList.indexOf(value) - 1

@@ -16,6 +16,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import PrimeMultiplication from "@/components/prime-multiplication";
 import CreateMessage from "@/components/create-message";
+import TotientFunction from "@/components/totient-function";
 
 export default function FirstStepPage() {
 
@@ -24,6 +25,7 @@ export default function FirstStepPage() {
 
     let [firstPrimeNumber, setFirstPrimeNumber] = useState(11)
     let [secondPrimeNumber, setSecondPrimeNumber] = useState(13)
+    let [primesChosen, setPrimesChosen] = useState(false)
 
     return (
         <div className="flex flex-col p-10 lg:p-20 text-xl lg:px-60 xl:px-80">
@@ -36,13 +38,51 @@ export default function FirstStepPage() {
                 setSliderDisabled={setSliderDisabled}
             />
 
-            <PrimeMultiplication 
-                firstPrimeNumber={firstPrimeNumber} 
-                secondPrimeNumber={secondPrimeNumber} 
-                setFirstPrimeNumber={setFirstPrimeNumber} 
-                setSecondPrimeNumber={setSecondPrimeNumber}
-            />
+            <AnimatePresence>
+                {
+                    sliderDisabled &&
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 12,
+                        }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <PrimeMultiplication
+                            firstPrimeNumber={firstPrimeNumber}
+                            secondPrimeNumber={secondPrimeNumber}
+                            setFirstPrimeNumber={setFirstPrimeNumber}
+                            setSecondPrimeNumber={setSecondPrimeNumber}
+                            numberPickersDisabled={primesChosen}
+                            setNumberPickersDisabled={setPrimesChosen}
+                        />
+                    </motion.div>
+                }
+            </AnimatePresence>
+            <AnimatePresence>
+                {
+                    primesChosen &&
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 12,
+                        }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <TotientFunction
+                            p1={firstPrimeNumber}
+                            p2={secondPrimeNumber}
+                        />
+                    </motion.div>
+                }
 
+            </AnimatePresence>
 
         </div>
     )
