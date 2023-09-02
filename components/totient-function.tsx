@@ -1,10 +1,10 @@
 "use client"
 
 import totient from "@/utils/totient";
-import { AnimatePresence, useDragControls } from "framer-motion";
+import { AnimatePresence, PanInfo, useDragControls } from "framer-motion";
 import Latex from "react-latex-next";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface TotientFunctionProps {
     p1: number;
@@ -15,7 +15,53 @@ export default function TotientFunction(
     { p1, p2 }: TotientFunctionProps
 ) {
 
+    let onDragEnd = (e: Event, info: PanInfo) => {
+        let x_target = targetDropNumber?.current?.getBoundingClientRect().x
+        let y_target = targetDropNumber?.current?.getBoundingClientRect().y
+
+        if (x_target) x_target += window.scrollX
+        if (y_target) y_target += window.scrollY
+
+        const x_drag = info.point.x
+        const y_drag = info.point.y
+
+        console.log(x_target, y_target, x_drag, y_drag)
+
+        if (x_target && y_target) {
+            if (Math.abs(x_target - x_drag) < 100 && Math.abs(y_target - y_drag) < 70) {
+                setNumberDropped(true)
+                targetDropNumber?.current?.classList.remove("shadow-xl")
+            }
+        }
+    }
+
+    let onDrag = (e: Event, info: PanInfo) => {        
+
+        let x_target = targetDropNumber?.current?.getBoundingClientRect().x
+        let y_target = targetDropNumber?.current?.getBoundingClientRect().y
+
+        console.log(x_target, y_target)
+
+        if (x_target) x_target += window.scrollX
+        if (y_target) y_target += window.scrollY
+
+        const x_drag = info.point.x
+        const y_drag = info.point.y
+
+        if (x_target && y_target) {
+            if (Math.abs(x_target - x_drag) < 100 && Math.abs(y_target - y_drag) < 70) {
+
+                targetDropNumber?.current?.classList.add("shadow-xl")
+            } else {
+                targetDropNumber?.current?.classList.remove("shadow-xl")
+            }
+        }
+    }
+
     let [numberDropped, setNumberDropped] = useState(false)
+
+    let targetDropNumber = useRef<HTMLDivElement>(null)
+
     const controls = useDragControls();
 
     return (
@@ -45,7 +91,9 @@ export default function TotientFunction(
                             <motion.div
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0, transition: { duration: 0.1 } }}
-                                className="mx-auto text-2xl"><Latex>$n=$</Latex></motion.div>
+                                className="mx-auto text-2xl">
+                                <Latex>$n=$</Latex>
+                            </motion.div>
                         }
                     </AnimatePresence>
                     <AnimatePresence>
@@ -66,43 +114,9 @@ export default function TotientFunction(
 
                                 dragElastic={1}
                                 drag
-                                onDrag={(e, info) => {
-                                    let x_target = document.getElementById("targetDropNumber")?.getBoundingClientRect().x
-                                    let y_target = document.getElementById("targetDropNumber")?.getClientRects()[0].y
+                                onDrag={onDrag}
 
-                                    if (x_target) x_target += window.scrollX
-                                    if (y_target) y_target += window.scrollY
-
-                                    const x_drag = info.point.x
-                                    const y_drag = info.point.y
-
-                                    if (x_target && y_target) {
-                                        if (Math.abs(x_target - x_drag) < 100 && Math.abs(y_target - y_drag) < 70) {
-
-                                            document.getElementById("targetDropNumber")?.classList.add("shadow-xl")
-                                        } else {
-                                            document.getElementById("targetDropNumber")?.classList.remove("shadow-xl")
-                                        }
-                                    }
-                                }}
-
-                                onDragEnd={(e, info) => {
-                                    let x_target = document.getElementById("targetDropNumber")?.getBoundingClientRect().x
-                                    let y_target = document.getElementById("targetDropNumber")?.getClientRects()[0].y
-
-                                    if (x_target) x_target += window.scrollX
-                                    if (y_target) y_target += window.scrollY
-
-                                    const x_drag = info.point.x
-                                    const y_drag = info.point.y
-
-                                    if (x_target && y_target) {
-                                        if (Math.abs(x_target - x_drag) < 100 && Math.abs(y_target - y_drag) < 70) {
-                                            setNumberDropped(true)
-                                        }
-                                    }
-
-                                }}
+                                onDragEnd={onDragEnd}
                                 dragControls={controls}
                                 className="font-mono border-2 w-fit px-2 py-2 mx-auto mt-1 shadow-md rounded-md z-50 bg-background">
                                 {p1 * p2}
@@ -114,7 +128,7 @@ export default function TotientFunction(
                         <Latex>$\phi($</Latex>
 
                         <div
-                            id="targetDropNumber"
+                            ref={targetDropNumber}
                             className="w-[3.5ch] font-mono border-2 flex items-center justify-center">
                             {
                                 numberDropped &&
@@ -142,10 +156,6 @@ export default function TotientFunction(
 
                         </div>
                     </div>
-
-                </div>
-
-                <div>
 
                 </div>
 

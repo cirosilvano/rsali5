@@ -44,26 +44,28 @@ export default function CreateMessage(
                     value={[sliderValue]}
                     onValueChange={([sliderValue]) => setSliderValue(sliderValue)}
                 />
-                
 
-                    <Button
-                        className="text-2xl py-7 w-60 mt-10 mx-auto"
-                        onClick={() => {
-                            setSliderDisabled(true)
 
-                        }}
-                        variant={sliderDisabled ? "completed" : "default"}
-                    >
+                <Button
+                    asChild
+                    className="text-2xl py-7 w-60 mt-10 mx-auto"
+                    onClick={() => {
+                        setSliderDisabled(true)
+
+                    }}
+                    variant={sliderDisabled ? "completed" : "default"}
+                >
+                    <a href="#prime-multiplication" className="text-center">
                         <div className="flex flex-row ml-1">
                             {sliderDisabled ?
                                 <>
-                                    <a href="#prime-factorization" className="text-center">Done</a>
+                                    Done
                                     <CheckCircle className="ml-2 mt-1" />
                                 </>
                                 : "Confirm"}
-
                         </div>
-                    </Button>
+                    </a>
+                </Button>
             </div>
 
             <div>
