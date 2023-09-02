@@ -145,10 +145,6 @@ export default function TotientFunction(
 
                 </div>
 
-                <div>
-
-                </div>
-
             </div>
         </>
     )
