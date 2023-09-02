@@ -5,6 +5,9 @@ import { AnimatePresence, PanInfo, useDragControls } from "framer-motion";
 import Latex from "react-latex-next";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import { GCD } from "@/utils/totient";
+import { Button } from "./ui/button";
+import { ArrowLeft, ArrowRight, Minus, Plus } from "lucide-react";
 
 interface TotientFunctionProps {
     p1: number;
@@ -14,6 +17,8 @@ interface TotientFunctionProps {
 export default function TotientFunction(
     { p1, p2 }: TotientFunctionProps
 ) {
+
+    let [selectedNumber, setSelectedNumber] = useState(1)
 
     let onDragEnd = (e: Event, info: PanInfo) => {
         let x_target = targetDropNumber?.current?.getBoundingClientRect().x
@@ -35,7 +40,7 @@ export default function TotientFunction(
         }
     }
 
-    let onDrag = (e: Event, info: PanInfo) => {        
+    let onDrag = (e: Event, info: PanInfo) => {
 
         let x_target = targetDropNumber?.current?.getBoundingClientRect().x
         let y_target = targetDropNumber?.current?.getBoundingClientRect().y
@@ -72,19 +77,16 @@ export default function TotientFunction(
                 </h2>
                 <div className="mt-5 space-y-2">
                     <p>
-                        Now that we have <Latex>$p1 \times p2=n$</Latex>, we can calculate the totient function of <Latex>$n$</Latex>, which is usually denoted as <Latex>$\phi(n)$</Latex>.
+                        Now that we have <Latex>$p1 \times p2=n$</Latex>, we can calculate the <b>totient function</b> of <Latex>$n$</Latex>, which is usually denoted as <Latex>$\phi(n)$</Latex>.
                     </p>
                     <p>
-                        The totient function is defined as the number of positive integers less than <Latex>$n$</Latex> that cannot divide <Latex>$n$</Latex> with zero remainder.
-                    </p>
-                    <p>
-                        In mathematical lingo, these numbers are called <b>coprimes</b> of <Latex>$n$</Latex>.
+                        The totient function is defined as the number of positive integers less than <Latex>$n$</Latex> <b>that do not share a divider other than 1</b> (aka <b>coprimes</b>).
                     </p>
                 </div>
 
                 <p className=""><Latex>$$\phi(n) = \text&#123; \#coprimes of $n$ from $1$ to &#125; n$$</Latex></p>
 
-                <div className="flex flex-col text-5xl justify-center">
+                <div className="flex flex-col justify-center">
                     <AnimatePresence>
                         {
                             !numberDropped &&
@@ -97,7 +99,17 @@ export default function TotientFunction(
                         }
                     </AnimatePresence>
                     <AnimatePresence>
-                        {!numberDropped &&
+                        {numberDropped ?
+                            <motion.div
+                                initial={{ opacity: 0, x: 0, y: 0 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0, transition: { duration: 0.1 } }}
+                                className="italic font-sm text-center mx-auto mt-5"
+
+                            >
+                                "There are {totient(p1 * p2).phi} numbers less than {p1 * p2} that do not share a divider with {p1 * p2} other than 1."
+                            </motion.div>
+                            :
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -118,7 +130,7 @@ export default function TotientFunction(
 
                                 onDragEnd={onDragEnd}
                                 dragControls={controls}
-                                className="font-mono border-2 w-fit px-2 py-2 mx-auto mt-1 shadow-md rounded-md z-50 bg-background">
+                                className="text-5xl font-mono border-2 w-[3.5ch] text-center py-2 mx-auto mt-1 shadow-md rounded-md z-50 bg-background">
                                 {p1 * p2}
                             </motion.div>
                         }
@@ -153,6 +165,37 @@ export default function TotientFunction(
 
                                 }
                             </AnimatePresence>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="mt-10">
+                    <h3 className="text-2xl font-bold">Coprime evaluator</h3>
+                    <p className="mt-3">Feel free to use the buttons below to evaluate the coprimes of {p1 * p2} one by one.</p>
+
+                    <div className="flex flex-col justify-center space-x-2 mt-10">
+                        <div className="flex flex-row justify-center space-x-3">
+                            <Button variant="outline"
+                                disabled={selectedNumber === 1}
+                                onClick={() => { if (selectedNumber > 1) setSelectedNumber(selectedNumber - 1) }}
+                            ><Minus /></Button>
+                            <div className="text-center text-5xl font-mono">{selectedNumber}</div>
+                            <Button variant="outline"
+                                disabled={selectedNumber === p1 * p2}
+                                onClick={() => { if (selectedNumber < p1 * p2) setSelectedNumber(selectedNumber + 1) }}
+                            ><Plus /></Button>
+                        </div>
+                        <div className="border-2 rounded-md text-center px-3 py-3 shadow-sm">
+                            <div className="h-[5ch]">
+                                {
+                                    GCD(p1 * p2, selectedNumber) === 1 ?
+                                        <>is a coprime of {p1 * p2}.</>
+                                        :
+                                        <>is not coprime of {p1 * p2}, they can both be divided by {GCD(p1 * p2, selectedNumber)}.</>
+                                }
+                            </div>
 
                         </div>
                     </div>
