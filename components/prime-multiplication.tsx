@@ -28,7 +28,7 @@ export default function PrimeMultiplication(
 
     return (
         <div className="">
-            <h2 id="prime-factorization" className="mt-20 text-3xl font-bold pt-5">
+            <h2 id="prime-multiplication" className="mt-20 text-3xl font-bold pt-5">
                 2. Prime multiplication
             </h2>
             <div className="mt-5 space-y-2">
@@ -69,16 +69,17 @@ export default function PrimeMultiplication(
                 </div>
 
                 <Button
+                    asChild
                     disabled={firstPrimeNumber === secondPrimeNumber}
-                    className="text-2xl py-7 w-60 mt-7 mx-auto"
-                    variant = {numberPickersDisabled ? "completed" : "default"}
+                    className="text-2xl py-7 w-60 mt-7 mx-auto flex"
+                    variant={numberPickersDisabled ? "completed" : "default"}
                     onClick={() => {
-                        if(!numberPickersDisabled && firstPrimeNumber !== secondPrimeNumber) {
+                        if (!numberPickersDisabled && firstPrimeNumber !== secondPrimeNumber) {
                             setNumberPickersDisabled(true)
                         }
                     }}
                 >
-                    <a href="#second" className="text-center">
+                    <a href="#totient" className="text-center">
                         <div className="flex flex-row ml-1">
                             {numberPickersDisabled ?
                                 <>
@@ -86,7 +87,8 @@ export default function PrimeMultiplication(
                                     <CheckCircle className="ml-2 mt-1" />
                                 </>
                                 : "Confirm"}
-                        </div></a>
+                        </div>
+                    </a>
                 </Button>
 
                 <AnimatePresence>
