@@ -1,5 +1,5 @@
 // greatest common divisor (GCD) via Euclidean algorithm
-function GCD(a: number, b: number) {
+export function GCD(a: number, b: number) {
     while (b != 0) {
             var t = b;
             b = a % b;

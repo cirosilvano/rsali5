@@ -1,8 +1,11 @@
-import { CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import NumberPicker from "./number-picker";
 import Latex from "react-latex-next";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger, DialogFooter, DialogHeader } from "@/components/ui/dialog";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 interface PrimeMultiplicationProps {
     firstPrimeNumber: number,
@@ -68,43 +71,85 @@ export default function PrimeMultiplication(
                     We are using small numbers to illustrate the concept in an easy way.
                 </div>
 
-                <Button
-                    asChild
-                    disabled={firstPrimeNumber === secondPrimeNumber}
-                    className="text-2xl py-7 w-60 mt-7 mx-auto flex"
-                    variant={numberPickersDisabled ? "completed" : "default"}
-                    onClick={() => {
-                        if (!numberPickersDisabled && firstPrimeNumber !== secondPrimeNumber) {
-                            setNumberPickersDisabled(true)
-                        }
-                    }}
-                >
-                    <a href="#totient" className="text-center">
-                        <div className="flex flex-row ml-1">
-                            {numberPickersDisabled ?
-                                <>
-                                    Done
-                                    <CheckCircle className="ml-2 mt-1" />
-                                </>
-                                : "Confirm"}
-                        </div>
-                    </a>
-                </Button>
-
-                <AnimatePresence>
-                    {firstPrimeNumber === secondPrimeNumber &&
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="text-red-700 flex justify-center items-center space-x-2">
-                            <XCircle className="mt-4" />
-                            <div className="text-sm text-center mt-5 mb-1">The two prime numbers must be different.</div>
-                        </motion.div>
-                    }
-                </AnimatePresence>
-
             </div>
+
+            <Button
+                asChild
+                disabled={firstPrimeNumber === secondPrimeNumber}
+                className="text-2xl py-7 w-60 mt-7 mx-auto flex"
+                variant={numberPickersDisabled ? "completed" : "default"}
+                onClick={() => {
+                    if (!numberPickersDisabled && firstPrimeNumber !== secondPrimeNumber) {
+                        setNumberPickersDisabled(true)
+                    }
+                }}
+            >
+                <a href="#prime-explanation" className="text-center">
+                    <div className="flex flex-row ml-1">
+                        {numberPickersDisabled ?
+                            <>
+                                Done
+                                <CheckCircle className="ml-2 mt-1" />
+                            </>
+                            : "Confirm"}
+                    </div>
+                </a>
+            </Button>
+
+            <AnimatePresence>
+                {firstPrimeNumber === secondPrimeNumber &&
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="text-red-700 flex justify-center items-center space-x-2">
+                        <XCircle className="mt-4" />
+                        <div className="text-sm text-center mt-5 mb-1">The two prime numbers must be different.</div>
+                    </motion.div>
+                }
+            </AnimatePresence>
+
+            <div id="prime-explanation" className="space-y-2 mt-10 border-2 px-5 py-5 rounded-md">
+                <div>It's very easy to multiply two numbers together. A calculator can do that with <b>very</b> big numbers almost instantly.</div>
+                <div>Refactoring a number to its two prime factors, however, is a whole different beast. It requires <b>a lot</b> of trial and error.</div>
+                <div>Imagine having to find the two numbers that, when multiplied, output <Latex>$n=$</Latex>
+                    <Dialog>
+                        <DialogTrigger
+                            className="border-2 px-2 py-1 rounded-sm shadow-sm hover:shadow-md"
+                        >
+                            251959084756578934940271832...
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                            <DialogHeader>
+                                <DialogTitle>RSA-2048</DialogTitle>
+                                <DialogDescription>
+                                    <p>It's quite big, isn't it?</p>
+
+
+
+                                </DialogDescription>
+                            </DialogHeader>
+
+
+                            <div className="w-96 px-2 font-mono break-words mt-3">
+                                25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
+                            </div>
+
+                            <div>
+                                This number will take hundreds of trillions of years for a classical computer to factor. Our only hope is to use a quantum computer!
+                            </div>
+
+
+                            <DialogFooter>
+                                <DialogClose>
+                                    <Button>Got it!</Button>
+                                </DialogClose>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+            </div>
+
         </div>
     )
 }

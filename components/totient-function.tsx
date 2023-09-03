@@ -6,7 +6,7 @@ import Latex from "react-latex-next";
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { GCD } from "@/utils/totient";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Minus, Plus } from "lucide-react";
 
 interface TotientFunctionProps {
@@ -80,7 +80,7 @@ export default function TotientFunction(
                         Now that we have <Latex>$p1 \times p2=n$</Latex>, we can calculate the <b>totient function</b> of <Latex>$n$</Latex>, which is usually denoted as <Latex>$\phi(n)$</Latex>.
                     </p>
                     <p>
-                        The totient function is defined as the number of positive integers less than <Latex>$n$</Latex> <b>that do not share a divider other than 1</b> (aka <b>coprimes</b>).
+                        The totient function is defined as the number of positive integers less than or equal to <Latex>$n$</Latex> <b>that do not share a divider other than 1</b> (aka <b>coprimes</b>).
                     </p>
                 </div>
 
@@ -107,7 +107,7 @@ export default function TotientFunction(
                                 className="italic font-sm text-center mx-auto mt-5"
 
                             >
-                                "There are {totient(p1 * p2).phi} numbers less than {p1 * p2} that do not share a divider with {p1 * p2} other than 1."
+                                "There are {totient(p1 * p2).phi} numbers less than or equal to {p1 * p2} that do not share a divider with {p1 * p2} other than 1."
                             </motion.div>
                             :
                             <motion.div
@@ -180,12 +180,12 @@ export default function TotientFunction(
                             <Button variant="outline"
                                 disabled={selectedNumber === 1}
                                 onClick={() => { if (selectedNumber > 1) setSelectedNumber(selectedNumber - 1) }}
-                            ><Minus /></Button>
+                            ><ArrowLeft /></Button>
                             <div className="text-center text-5xl font-mono">{selectedNumber}</div>
                             <Button variant="outline"
                                 disabled={selectedNumber === p1 * p2}
                                 onClick={() => { if (selectedNumber < p1 * p2) setSelectedNumber(selectedNumber + 1) }}
-                            ><Plus /></Button>
+                            ><ArrowRight /></Button>
                         </div>
                         <div className="border-2 rounded-md text-center px-3 py-3 shadow-sm">
                             <div className="h-[5ch]">
@@ -196,7 +196,6 @@ export default function TotientFunction(
                                         <>is not coprime of {p1 * p2}, they can both be divided by {GCD(p1 * p2, selectedNumber)}.</>
                                 }
                             </div>
-
                         </div>
                     </div>
 
