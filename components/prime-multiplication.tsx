@@ -131,30 +131,28 @@ export default function PrimeMultiplication(
                 <div>Imagine having to find the two numbers that, when multiplied, output <Latex>$n=$</Latex>
                     <Dialog>
                         <DialogTrigger
-                            className="border-2 px-2 py-1 rounded-sm shadow-sm hover:shadow-md"
+                            className="border-2 px-2 py-1 rounded-sm shadow-sm hover:shadow-md break-words w-full"
                         >
                             251959084756578934940271832...
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="flex flex-col">
                             <DialogHeader>
                                 <DialogTitle>RSA-2048</DialogTitle>
                                 <DialogDescription>
                                     <p>It&apos;s quite big, isn&apos;t it?</p>
-
-
-
                                 </DialogDescription>
                             </DialogHeader>
+                            <div className="mt-3 w-full px-4">
+                                <div className="text-sm md:text-md font-mono break-words">
+                                    25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
+                                </div>
+
+                                <div className="mt-4">
+                                    This number will take hundreds of trillions of years for a classical computer to factor. Our only hope is to use a quantum computer!
+                                </div>
 
 
-                            <div className="w-96 px-2 font-mono break-words mt-3">
-                                25195908475657893494027183240048398571429282126204032027777137836043662020707595556264018525880784406918290641249515082189298559149176184502808489120072844992687392807287776735971418347270261896375014971824691165077613379859095700097330459748808428401797429100642458691817195118746121515172654632282216869987549182422433637259085141865462043576798423387184774447920739934236584823824281198163815010674810451660377306056201619676256133844143603833904414952634432190114657544454178424020924616515723350778707749817125772467962926386356373289912154831438167899885040445364023527381951378636564391212010397122822120720357
                             </div>
-
-                            <div>
-                                This number will take hundreds of trillions of years for a classical computer to factor. Our only hope is to use a quantum computer!
-                            </div>
-
 
                             <DialogFooter>
                                 <DialogClose>
