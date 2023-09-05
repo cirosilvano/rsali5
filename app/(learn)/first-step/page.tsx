@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import PrimeMultiplication from "@/components/prime-multiplication";
 import CreateMessage from "@/components/create-message";
 import TotientFunction from "@/components/totient-function";
+import ExponentChooser from "@/components/exponent-chooser";
 
 export default function FirstStepPage() {
 
@@ -26,6 +27,12 @@ export default function FirstStepPage() {
     let [firstPrimeNumber, setFirstPrimeNumber] = useState(11)
     let [secondPrimeNumber, setSecondPrimeNumber] = useState(13)
     let [primesChosen, setPrimesChosen] = useState(false)
+
+    let [totientCalculated, setTotientCalculated] = useState(false)
+    let [totient, setTotient] = useState(0)
+
+    let [exponent, setExponent] = useState(2)
+    let [exponentChosen, setExponentChosen] = useState(false)
 
     return (
         <div className="flex flex-col p-10 lg:p-20 text-xl lg:px-60 xl:px-80">
@@ -78,6 +85,33 @@ export default function FirstStepPage() {
                         <TotientFunction
                             p1={firstPrimeNumber}
                             p2={secondPrimeNumber}
+                            setTotientCalculated={setTotientCalculated}
+                            setTotient={setTotient}
+                        />
+                    </motion.div>
+                }
+
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {
+                    totientCalculated &&
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 12,
+                        }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <ExponentChooser 
+                            totient={totient} 
+                            exponent={exponent}
+                            setExponent={setExponent}
+                            exponentChosen={exponentChosen}
+                            setExponentChosen={setExponentChosen} 
                         />
                     </motion.div>
                 }

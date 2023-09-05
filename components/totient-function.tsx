@@ -7,15 +7,17 @@ import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { GCD } from "@/utils/totient";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight, Minus, Plus } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, Minus, Plus } from "lucide-react";
 
 interface TotientFunctionProps {
     p1: number;
     p2: number;
+    setTotientCalculated: (totientCalculated: boolean) => void;
+    setTotient: (totient: number) => void;
 }
 
 export default function TotientFunction(
-    { p1, p2 }: TotientFunctionProps
+    { p1, p2, setTotientCalculated, setTotient }: TotientFunctionProps
 ) {
 
     let [selectedNumber, setSelectedNumber] = useState(1)
@@ -35,6 +37,8 @@ export default function TotientFunction(
         if (x_target && y_target) {
             if (Math.abs(x_target - x_drag) < 100 && Math.abs(y_target - y_drag) < 70) {
                 setNumberDropped(true)
+                setTotientCalculated(true)
+                setTotient(totient(p1 * p2).phi)
                 targetDropNumber?.current?.classList.remove("shadow-xl")
             }
         }
@@ -197,6 +201,7 @@ export default function TotientFunction(
                                 }
                             </div>
                         </div>
+
                     </div>
 
                 </div>
