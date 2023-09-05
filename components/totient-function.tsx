@@ -107,7 +107,7 @@ export default function TotientFunction(
                                 className="italic font-sm text-center mx-auto mt-5"
 
                             >
-                                "There are {totient(p1 * p2).phi} numbers less than or equal to {p1 * p2} that do not share a divider with {p1 * p2} other than 1."
+                                &quot;There are {totient(p1 * p2).phi} numbers less than or equal to {p1 * p2} that do not share a divider with {p1 * p2} other than 1.&quot;
                             </motion.div>
                             :
                             <motion.div
