@@ -1,4 +1,4 @@
-import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Key, Lock, XCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import NumberPicker from "./number-picker";
 import Latex from "react-latex-next";
@@ -66,11 +66,6 @@ export default function PrimeMultiplication(
                     </div>
                 </div>
 
-                <div className="text-slate-500 text-sm mt-10 text-center" >
-                    Note: real RSA encryption requires much bigger numbers (hundreds of digits).
-                    We are using small numbers to illustrate the concept in an easy way.
-                </div>
-
             </div>
 
             <Button
@@ -97,6 +92,27 @@ export default function PrimeMultiplication(
             </Button>
 
             <AnimatePresence>
+                {
+                    numberPickersDisabled &&
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="">
+                        <div className="text-center mt-5 border-2 py-3 px-5 border-orange-300 bg-orange-100 rounded-xl mx-auto">
+                            <div className="flex flex-col md:flex-row text">
+                                <div className="flex flex-row mx-auto mb-3 md:mb-0 text-orange-900 space-x-1">
+                                    <div>#1</div>
+                                    <Lock />
+                                </div>
+                                <div className="text-center w-full"><Latex>$n = $</Latex> {firstPrimeNumber * secondPrimeNumber} will be the first part of Alice&apos;s public key.</div>
+                            </div>
+                        </div>
+                    </motion.div>
+                }
+            </AnimatePresence>
+
+            <AnimatePresence>
                 {firstPrimeNumber === secondPrimeNumber &&
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -110,7 +126,7 @@ export default function PrimeMultiplication(
             </AnimatePresence>
 
             <div id="prime-explanation" className="space-y-2 mt-10 border-2 px-5 py-5 rounded-md">
-                <div>It's very easy to multiply two numbers together. A calculator can do that with <b>very</b> big numbers almost instantly.</div>
+                <div>It&apos;s very easy to multiply two numbers together. A calculator can do that with <b>very</b> big numbers almost instantly.</div>
                 <div>Refactoring a number to its two prime factors, however, is a whole different beast. It requires <b>a lot</b> of trial and error.</div>
                 <div>Imagine having to find the two numbers that, when multiplied, output <Latex>$n=$</Latex>
                     <Dialog>
@@ -123,7 +139,7 @@ export default function PrimeMultiplication(
                             <DialogHeader>
                                 <DialogTitle>RSA-2048</DialogTitle>
                                 <DialogDescription>
-                                    <p>It's quite big, isn't it?</p>
+                                    <p>It&apos;s quite big, isn&apos;t it?</p>
 
 
 
