@@ -105,7 +105,7 @@ export default function PrimeMultiplication(
                                     <div>#1</div>
                                     <Lock />
                                 </div>
-                                <div className="text-center w-full"><Latex>$n = $</Latex> {firstPrimeNumber * secondPrimeNumber} will be the first part of Alice&apos;s public key.</div>
+                                <div className="text-center w-full"><Latex>$n = $</Latex> {firstPrimeNumber * secondPrimeNumber} will be the first part of Bob&apos;s public key.</div>
                             </div>
                         </div>
                     </motion.div>

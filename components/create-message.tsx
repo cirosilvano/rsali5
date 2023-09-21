@@ -30,9 +30,8 @@ export default function CreateMessage(
             <div className="flex flex-col justify-center">
                 <div className="text-8xl text-center pt-10">
                     <div className="text-lg"><Latex>$m=$</Latex></div>
-                    {sliderValue / 10 + 1}
-                    <div className="text-lg">(day
-                        {sliderValue > 0 ? "s" : ""})
+                    {sliderValue / 10 + 2}
+                    <div className="text-lg">(days)
                     </div>
                 </div>
 

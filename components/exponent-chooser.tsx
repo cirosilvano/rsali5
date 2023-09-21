@@ -21,12 +21,19 @@ export default function ExponentChooser(
 ) {
 
     let inputRef = useRef<HTMLInputElement>(null)
+    let suggestion = 0
+    for(let i=2; i<10; i++) {
+        if(GCD(i, totient) == 1) {
+            suggestion = i
+            break
+        }
+    }
 
     return (
         <div className="mt-20">
             <h1 className="text-3xl font-bold">4. Choose an exponent</h1>
             <div className="mt-5 space-y-3">
-                <p>We are almost done with creating Alice&apos;s <b>public key</b>!</p>
+                <p>We are almost done with creating Bob&apos;s <b>public key</b>!</p>
                 <p>The last thing we need to do is <b>generate a number</b> <Latex>$e$</Latex> (which we will later use as exponent for a mathematical expression).</p>
                 <p>Usually, exponents aren&apos;t big numbers, even in standard RSA implementations. They usually don&apos;t exceed 65537 in size (actually, 65537 is the most used public exponent).</p>
                 <p>Just note: <Latex>$e$</Latex> <b>must be a coprime of</b> <Latex> $\phi(n)$.</Latex></p>
@@ -53,14 +60,15 @@ export default function ExponentChooser(
 
                 <AnimatePresence>
                     {
-                        !(GCD(exponent, 10) === 1) &&
+                        !(GCD(exponent, totient) === 1) &&
                         <motion.div
                             initial={{ opacity: 0, scale: 0 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
                         >
-                            <div className="text-center mx-auto mt-1">
-                                <p className="text-red-700 text-sm">Exponent must be coprime of <Latex>$\phi(n) = $</Latex> {totient}</p>
+                            <div className="text-center mx-auto mt-1 text-red-700 text-sm">
+                                <p className="">Exponent must be coprime of <Latex>$\phi(n) = $</Latex> {totient}</p>
+                                <p>Suggestion: <b>{suggestion}</b></p>
                             </div>
                         </motion.div>
 
@@ -78,7 +86,7 @@ export default function ExponentChooser(
                     }}
                     variant={exponentChosen ? "completed" : "default"}
                 >
-                    <a href="#" className="text-center">
+                    <a href="#public-encryption" className="text-center">
                         <div className="flex flex-row ml-1">
                             {exponentChosen ?
                                 <>
@@ -106,7 +114,7 @@ export default function ExponentChooser(
                                     <div>#2</div>
                                     <Lock />
                                 </div>
-                                <div className="text-center w-full"><Latex>$e = $</Latex> {exponent} will be the second (and last) part of Alice&apos;s public key.<br/>We are done!</div>
+                                <div className="text-center w-full"><Latex>$e = $</Latex> {exponent} will be the second (and last) part of Bob&apos;s public key.<br/>Now let&apos;s encrypt!</div>
                             </div>
                         </div>
                     </motion.div>
