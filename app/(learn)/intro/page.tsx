@@ -57,7 +57,7 @@ export default function IntroPage() {
             <p className="mt-4">This way, even if Maddie is listening, she will never be able to understand what they are saying!</p>
 
 
-            <a href="/first-step" className="flex justify-center">
+            <a href="/public-encryption" className="flex justify-center">
                 <Button className="text-2xl px-7 py-7 mt-10">
                     <div className="flex flex-row ml-2">
                         Let&apos;s do this!
