@@ -18,6 +18,7 @@ import PrimeMultiplication from "@/components/prime-multiplication";
 import CreateMessage from "@/components/create-message";
 import TotientFunction from "@/components/totient-function";
 import ExponentChooser from "@/components/exponent-chooser";
+import EncryptionStage from "@/components/encryption-stage";
 
 export default function FirstStepPage() {
 
@@ -112,6 +113,29 @@ export default function FirstStepPage() {
                             setExponent={setExponent}
                             exponentChosen={exponentChosen}
                             setExponentChosen={setExponentChosen} 
+                        />
+                    </motion.div>
+                }
+
+            </AnimatePresence>
+
+            <AnimatePresence>
+                {
+                    exponentChosen &&
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 12,
+                        }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <EncryptionStage
+                            message={sliderValue / 10 + 2}
+                            exponent={exponent}
+                            n={firstPrimeNumber * secondPrimeNumber}
                         />
                     </motion.div>
                 }
